@@ -1,5 +1,7 @@
 import { CO2Data } from "./components/CO2Data";
 import "./App.css";
+import { Route, Routes } from "react-router-dom";
+
 function App() {
   return (
     <div
@@ -10,8 +12,17 @@ function App() {
         textAlign: "center",
       }}
     >
-      <h1>PostCodeCarbon</h1>
-      <CO2Data />
+      <h1>Carbon Calculator</h1>
+      <Routes>
+        {" "}
+        <Route
+          path="/"
+          element={
+            <CO2Data
+            />
+          }
+        ></Route>
+        </Routes>
     </div>
   );
 }
