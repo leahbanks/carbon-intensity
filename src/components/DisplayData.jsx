@@ -1,36 +1,47 @@
-import { FuelRadar } from "./Radar";
+import { MyResponsiveRadar } from "./Radar";
 import { useState, useEffect } from "react";
+import { format } from "date-fns";
 
 export function DisplayData({ carbonData }) {
   const [inputData, setInput] = useState("");
-  let intensity = carbonData.data[0].data[0].intensity.index;
-  let data = carbonData.data[0].data[0].generationmix;
-  let location = carbonData.data[0].shortname;
+  const location = carbonData.data[0].shortname;
+  const intensity = carbonData.data[0].data[0].intensity.index;
+  const data = carbonData.data[0].data[0].generationmix;
+  console.log(data)
 
   useEffect(() => {
-    let formatted = data.map((key) => {
+    const formatted = data.map((key) => {
       return { fuel: key.fuel, [location]: key.perc };
     });
     setInput(formatted);
   }, [location, data]);
 
+  const from = new Date(carbonData.data[0].data[0].from);
+  const formattedFrom = format(from, "HH:MM");
+
+  const to = new Date(carbonData.data[0].data[0].to);
+  const formattedTo = format(to, "HH:MM 'on' E do LLL y")
+
   return (
-    <section
+    <section className="carbon-radar"
       style={{
         backgroundColor: "white",
         width: "100vw",
-        height: "70vh",
+        height: "80vh",
         textAlign: "center",
       }}
     >
-      <p>location: {carbonData.data[0].shortname}</p>
+      <p><b>Location:</b> {carbonData.data[0].shortname}</p>
       <p>
-        timeframe from: {carbonData.data[0].data[0].from} to{" "}
-        {carbonData.data[0].data[0].to}
+       <b>Carbon Intensity:</b>{" "}
+        {intensity.slice(0, 1).toUpperCase() +
+          intensity.slice(1, intensity.length)}
       </p>
-      <p>carbon intensity: {intensity}</p>
-      <h4>Type of fuel:</h4>
-      <FuelRadar location={location} data={inputData} />
+      <p>
+        <b>Time frame:</b> Between {formattedFrom} and {formattedTo}
+      </p>
+      <h4>Type of fuel</h4>
+      <MyResponsiveRadar location={location} data={inputData} />
     </section>
   );
 }
