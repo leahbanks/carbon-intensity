@@ -1,6 +1,6 @@
 import { ResponsiveRadar } from '@nivo/radar'
 
-export const FuelRadar = ({ location, data }) => (
+export const MyResponsiveRadar = ({ location, data }) => (
     <ResponsiveRadar
         data={data}
         keys={[`${location}`]}
@@ -8,12 +8,12 @@ export const FuelRadar = ({ location, data }) => (
         valueFormat=">-.2f"
         margin={{ top: 70, right: 80, bottom: 40, left: 80 }}
         borderColor={{ from: 'color' }}
-        gridLabelOffset={30}
+        gridLabelOffset={36}
         dotSize={10}
         dotColor={{ theme: 'background' }}
         dotBorderWidth={2}
-        colors={{ scheme: 'red_yellow_green' }}
-        fillOpacity={0.7}
+        colors={{ scheme: 'spectral' }}
+        fillOpacity={0.5}
         motionConfig="wobbly"
         legends={[
             {
@@ -38,3 +38,5 @@ export const FuelRadar = ({ location, data }) => (
         ]}
     />
 )
+
+
