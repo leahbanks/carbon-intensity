@@ -12,7 +12,7 @@ function App() {
         textAlign: "center",
       }}
     >
-      <h1>Carbon Calculator</h1>
+      <h1>Carbon Calculator 🌳</h1>
       <Routes>
         {" "}
         <Route

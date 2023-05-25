@@ -7,7 +7,7 @@ export function DisplayData({ carbonData }) {
   const location = carbonData.data[0].shortname;
   const intensity = carbonData.data[0].data[0].intensity.index;
   const data = carbonData.data[0].data[0].generationmix;
-  console.log(data)
+  console.log(data);
 
   useEffect(() => {
     const formatted = data.map((key) => {
@@ -20,10 +20,11 @@ export function DisplayData({ carbonData }) {
   const formattedFrom = format(from, "HH:MM");
 
   const to = new Date(carbonData.data[0].data[0].to);
-  const formattedTo = format(to, "HH:MM 'on' E do LLL y")
+  const formattedTo = format(to, "HH:MM 'on' E do LLL y");
 
   return (
-    <section className="carbon-radar"
+    <section
+      className="carbon-radar"
       style={{
         backgroundColor: "white",
         width: "100vw",
@@ -31,16 +32,27 @@ export function DisplayData({ carbonData }) {
         textAlign: "center",
       }}
     >
-      <p><b>Location:</b> {carbonData.data[0].shortname}</p>
       <p>
-       <b>Carbon Intensity:</b>{" "}
+        <b>Location:</b> {carbonData.data[0].shortname}
+      </p>
+      <p>
+        <b>Carbon Intensity:</b>{" "}
         {intensity.slice(0, 1).toUpperCase() +
-          intensity.slice(1, intensity.length)}
+          intensity.slice(1, intensity.length)}{" "}
+        {intensity === "low"
+          ? "😊"
+          : intensity === "high"
+          ? "🙁"
+          : intensity === "moderate"
+          ? "😐"
+          : intensity === "very low"
+          ? "😃"
+          : "😟"}
       </p>
       <p>
         <b>Time frame:</b> Between {formattedFrom} and {formattedTo}
       </p>
-      <h4>Type of fuel</h4>
+      <h4>Fuel Types</h4>
       <MyResponsiveRadar location={location} data={inputData} />
     </section>
   );
