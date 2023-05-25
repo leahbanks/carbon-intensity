@@ -19,7 +19,7 @@ export function FetchData ({location}) {
     else
     return (
         <section>
-            <h2>Results</h2>
+            <h2>Your Carbon Forecast</h2>
             <DisplayData carbonData={carbonData}/>
         </section>
     )
